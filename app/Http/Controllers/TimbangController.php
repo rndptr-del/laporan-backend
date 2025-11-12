@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Timbang;
+use App\Exports\TimbangExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TimbangController extends Controller
 {
@@ -41,5 +43,10 @@ class TimbangController extends Controller
             'message' => 'Data berhasil di tambahkan',
             'data' => $data
         ], 201);
+    }
+
+    public function export()
+    {
+    return Excel::download(new TimbangExport, 'data_timbang.xlsx');
     }
 }
